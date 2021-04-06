@@ -1,5 +1,5 @@
                 INSTALL instructions for POTION
-          (last updated 02/20/2018 - mm/dd/yyyy format)
+          (last updated 04/06/2021- mm/dd/yyyy format)
 
 AUTHORS
 -=-=-=-
@@ -15,7 +15,7 @@ First things first: dependencies
 A - Third-party software
 -=-=-=-=-=-=-=-=-=-=-=-=
 
-You need to install the following third-party software to use POTION:
+You need to install the following third-party software to use POTION in site model:
 
 - MUSCLE  - http://www.drive5.com/muscle/downloads.htm
 - Prank   - http://wasabiapp.org/software/prank/prank_installation/
@@ -33,6 +33,11 @@ You need to install the following third-party software to use POTION:
 - Clustal Omega - http://www.clustal.org/omega/
 - RAxML   - https://github.com/stamatak/standard-RAxML
 - CodonPhyML - https://sourceforge.net/projects/codonphyml/files/latest/download
+
+To use POTION in branch-site model you also need intall:
+- FastCnodeML - ftp://ftp.vital-it.ch/tools/FastCodeML/
+- Newick_utils - http://cegg.unige.ch/newick_utils
+
 
 We recommend you to download the versions for which we tested POTION's latest 
 version, listed in
@@ -145,6 +150,7 @@ path of the third-party software IF you did not have added their path to $PATH
 variable. You can use '$potion_dir' to refer to the path in 'potion_dir'.
 
 - codeml: path to the Codeml executable of PAML package
+- fastcodeml: path to the FastCodeML executable 
 - consense: path to the Consense executable of Phylip package
 - dnaml: path to the Dnaml executable
 - mafft: path to MAFFT executable
@@ -158,3 +164,8 @@ variable. You can use '$potion_dir' to refer to the path in 'potion_dir'.
 - phyml: path to the PhyML executable
 - raxml: path to the RAxML executable
 - codonphyml: path to the CodonPhyML executable
+- nw_rename: path to nw_rename in newick-utils
+- nw_labels: path to nw_labels in newick-utils
+- nw_prune: path to nw_prune in newick-utils
+- nw_clade: path to nw_clade in newick-utils
+- nw_reroot: path to nw_reroot in newick-utils

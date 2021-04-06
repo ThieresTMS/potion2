@@ -121,7 +121,7 @@ infer_positive_selection = fastcodeml    # program to infer positive selection. 
 
 recombination_qvalue = 0.01              # q-value for recombination detection. Must occur for all the specified tests
 rec_minimum_confirmations = 2            # minimum number of significant recombination tests positives
-rec_mandatory_tests = phi                # any combination of the three test names, separated by spaces, or N.A. to use
+rec_mandatory_tests = N.A.                # any combination of the three test names, separated by spaces, or N.A. to use
                                          # any test
 
 remove_gaps = 50                         # numeric values between 0 and 1 will remove columns with that percentage of

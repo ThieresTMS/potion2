@@ -216,17 +216,19 @@ my %nss_pvalues;
 my %maxchi2_pvalues;
 
 # preparing the phylogenetic trees
-#if ($parameters_ref->{recombination_qvalue} !~ /N.A./) {
+
+if ($parameters_ref->{rec_mandatory_tests} eq "N.A."){
+  next;
+} else{
   foreach my $ortholog_group (keys %{$clusters_ref}) {
     push (@id_rec_to_process, "$ortholog_group;id_rec"); # assign to produce the recombination analysis (id_rec)
   }
-if ($parameters_ref->{recombination_qvalue} =~ /N.A./) {
+}
+
+#if ($parameters_ref->{recombination_qvalue} =~ /N.A./) {
   foreach my $ortholog_group (keys %{$clusters_ref}) {
     push (@f_tree_to_process, "$ortholog_group;f_tree"); # assign to produce the recombination analysis (id_rec)
   }
-}
-# else {
-#  die("$parameters_ref->{recombination_qvalue} looks weird, it should be a number or the string N.A.\n");
 #}
 
 while (@id_rec_to_process > 0 || @f_tree_to_process > 0 || @model8_to_process > 0 || @model8a_to_process > 0 ||  @model7_to_process > 0 || @model2_to_process > 0 || @model1_to_process > 0 || @modelH1_to_process > 0 || @modelH0_to_process > 0 || $n_process > 0) { #defining which task will start when a free processor is available
