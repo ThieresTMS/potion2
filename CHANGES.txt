@@ -1,4 +1,15 @@
 ################
+# POTION 2.0.0 #
+################
+
+Commit date: 04/06/2021
+
+-Potion now performs branch-site model analysis. To use it set the parameter "mode" in project config to "site" option.
+
+-Potion now supports the latest version of trimAL (version 1.4).
+
+
+################
 # POTION 1.4.2 #
 ################
 

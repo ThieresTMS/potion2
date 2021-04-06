@@ -1,5 +1,5 @@
                        README for POTION
-             (last updated 02/20/2018 - mm/dd/yyyy format)
+             (last updated 04/06/2021 - mm/dd/yyyy format)
 
 AUTHORS
 -=-=-=-
@@ -52,10 +52,15 @@ of Trypanosoma brucei paralogs used to validate POTION.
 Once installed, there are two steps you should do to use POTION on your data:
 
 A) Generate the following input files:
+  Site model:
     - Fasta files with the nucleotide coding DNA sequence (CDS) of all genes of
       each species you want to analyze (one species per file). Keep them in the
       same directory.
     - OrthoMCL v1.4 output file with gene homology relationships.
+
+  Branch-site model:
+    - Same as in site model
+    - Phylogenetic tree in newick format
 
 HINT: You can use some scripts distributed with POTION (found in 'bin/utils' 
 directory) to generate the fasta and orthomcl v1.4 files from genbank/orthoxml
@@ -66,9 +71,13 @@ B) Create a project configuration file.
 To create a default configuration file, execute POTION with '--create_conf'
 option. POTION fills in most parameters if you provide the proper information
 during the process. The default parameters left for you fill in are:
-  1) Path to the fasta files  ('CDS_dir_path')
-  2) OrthoMCL 1.4 output file ('homology_file_path')
-  3) Output directory's name  ('project_dir_path')
+  Site model:
+    1) Path to the fasta files  ('CDS_dir_path')
+    2) OrthoMCL 1.4 output file ('homology_file_path')
+    3) Output directory's name  ('project_dir_path')
+  Branch-site model:
+    1) Same as in site model
+    2) Phylogenetic tree file   ('tree_file_path')
 
 For a complete list of configuration parameters, execute POTION with the 
 '--help' option; you will see that you can provide POTION with the information
@@ -103,7 +112,7 @@ with third-party software, to create a default project configuration file
 (option '--create_conf') and the 'potion_config' file, which you must edit for
 POTION to find the third-party software in your machine.
   
-  examples - contains the two example datasets (TRYP and MYC) used to validate
+  examples - contains the tree example datasets (TRYP, MYC and YEAST) used to validate
 POTION. Use them to validate your POTION installation. For each dataset, we
 provide the homology relationship data, sequence data and POTION configuration
 files to reproduce the results described in our article. 
@@ -220,6 +229,7 @@ potion_dir - path to the root directory of POTION.
 ------------------- + paths to third-party programs + ---------------
 
 codeml - path to the Codeml executable of PAML package 
+fastcodeml - path to the FastCodeML executable
 consense - path to the Consense executable of Phylip package 
 dnaml - path to the Dnaml executable 
 clustalo - path to the Clustal Omega executable
@@ -233,6 +243,11 @@ mafft - path to mafft executable
 phyml - path to phyml executable
 codonphyml - path to codonphyml executable
 raxml - path to RAxML executable
+nw_rename - path to nw_rename in newick-utils
+nw_labels - path to nw_labels in newick-utils
+nw_prune - path to nw_prune in newick-utils
+nw_clade - path to nw_clade in newick-utils
+nw_reroot - path to nw_reroot in newick-utils
 
 -------------- + names of output files + -------------------------
 
@@ -275,9 +290,8 @@ POTION. An "M" indicates a mandatory parameter.
 PROJECT PARAMETERS 
 -=-=-=-=-=-=-=-=-=
 
-mode - POTION's main analysis mode. Currently POTION only supports
-"site" as main analysis mode, future versions are expected to support
-"branch" and "branch-site" modes as well.
+mode - POTION's main analysis mode. POTION supports
+"site" or "branch" models.
 
 CDS_dir_path - path to the directory containing the fasta CDS files. (M)
 
@@ -286,6 +300,8 @@ homology relationships among the CDS in the fasta files. (M)
 
 project_dir_path - path to the directory where the results will be written.
 If the directory doesn't exist, POTION will attempt to create it. (M)
+
+tree_file_path - path to the newick phylogenetic tree. (M, only in branch model)
 
 max_processes - Defines the maximum number of processors to be used in
 the parallelized steps of POTION's algorithm. (M)
@@ -330,7 +346,7 @@ values are:
   "4" remove 1-1 orthologs and split remaining paralogs to analyze each species 
       individually. (M)
 
-validation_criteria - Defines which quality criteria POTION should use to 
+sequence_validation_criteria - Defines which quality criteria POTION should use to 
 remove individual sequences. Possible values are: 
   "0"   do not perform any sequence quality filter.
   "1"   checks for valid start codons.
@@ -435,6 +451,13 @@ genome. POTION will also return all the results found (sequence, IDs and
 coordinates) in reference to the anchor genome. Possible value is the name of
 one fasta CDS file.
 
+minimum_taxa_foreground - minimum number of taxa in foreground branch (M, only in branch model)
+
+mimimum_taxa_bacground - minimum number of taxa in bacground branch (M, only in branch model)
+
+maximum_taxa_foregroud - maximum number of taxa in foreground branch (M, only in branch model)
+
+maximum_taxa_bacground - maximum number of taxa in bacgroud branch (M, only in branch model)
 
 THIRD-PARTY SOFTWARE CONFIGURATION 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
